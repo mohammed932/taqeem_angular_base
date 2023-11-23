@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FormatLabelService {
-
-  constructor() { }
-   patientLabel(patients: any[]): string {
-    return patients.map(patient => 
-      Object.values(patient).join(' / ')
-    ).join(', ');
+  constructor() {}
+  patientLabel(patients: any[]): string {
+    return patients
+      .map((patient) => Object.values(patient).join(' / '))
+      .join(', ');
   }
 }

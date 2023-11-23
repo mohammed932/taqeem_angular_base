@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FormatDateAndTimeService {
-
-  constructor() { }
+  constructor() {}
   formatDate(date: Date | any): string {
     const formattedDate = new Date(date);
     const day = formattedDate.getDate().toString().padStart(2, '0');

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { SpinnerService } from '../../services/spinner.service';
 // import { Message } from 'primeng/api';
 
@@ -6,17 +6,20 @@ import { SpinnerService } from '../../services/spinner.service';
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss'],
+  standalone: true,
 })
 export class SpinnerComponent {
   isLoad: boolean = false;
-  constructor(public SpinnerService: SpinnerService, private cd: ChangeDetectorRef) {
+  constructor(
+    public SpinnerService: SpinnerService,
+    private cd: ChangeDetectorRef
+  ) {
     // this.isLoad = this.SpinnerService.isLoad;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     console.log('init');
 
-   
     // this.SpinnerService.isLoading.subscribe(this.showSpinner.bind(this));
     this.SpinnerService.isLoading.subscribe((state: boolean) => {
       this.isLoad = state;
@@ -27,11 +30,9 @@ export class SpinnerComponent {
     if (state == true) {
       this.isLoad = true;
       this.cd.detectChanges();
-
     } else {
       this.isLoad = false;
       this.cd.detectChanges();
     }
   }
-
 }

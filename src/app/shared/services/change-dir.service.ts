@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ChangeDirService {
-
-  constructor(   
-    ) { }
+  constructor() {}
   onChangeLang(cultureName: string) {
     // this.sessionState.setLanguage(cultureName);
   }

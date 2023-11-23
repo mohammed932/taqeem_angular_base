@@ -1,11 +1,12 @@
 // import { AuthService, ConfigStateService, CurrentUserDto } from '@abp/ng.core';
-import { Component, Input, Inject, ViewChild } from '@angular/core';
-import { Observable, filter } from 'rxjs';
-import { sideNavToggle } from '../sidenav/sidenav.component';
+import { Component } from '@angular/core';
+import { SidenavComponent, sideNavToggle } from '../sidenav/sidenav.component';
 // import { ChangeDirService } from 'src/app/shared/services/change-dir.service';
 // import { MenuItem } from 'primeng/api';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { ChangeDirService } from '../../shared/services/change-dir.service';
+import { HeaderComponent } from '../header/header.component';
 // import { Breadcrumb } from 'primeng/breadcrumb';
 // import { BreadcrumbService } from 'src/app/shared/services/breadcrumb.service';
 
@@ -13,6 +14,8 @@ import { ChangeDirService } from '../../shared/services/change-dir.service';
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss'],
+  standalone: true,
+  imports: [CommonModule, HeaderComponent, SidenavComponent, RouterOutlet],
 })
 export class MainLayoutComponent {
   // currentUser$: Observable<CurrentUserDto> = this.configState.getOne$('currentUser');
@@ -21,25 +24,19 @@ export class MainLayoutComponent {
   // home: MenuItem | undefined;
   // menuItems: MenuItem[] | undefined;
   // crumbs$: Observable<MenuItem[]>;
-    
+
   constructor(
     // private configState: ConfigStateService,
-    public ChangeDirService: ChangeDirService,
-    // private authService: AuthService,
-    // private breadcrumb: BreadcrumbService
+    public ChangeDirService: ChangeDirService // private authService: AuthService, // private breadcrumb: BreadcrumbService
   ) {}
 
-  ngOnInit(){
-
+  ngOnInit() {
     // this.home = { icon: 'pi pi-home',  command: event => {
     //  this.breadcrumb.setCrumbs(null)
     // }, routerLink: '/' };
-  
     // this.crumbs$ = this.breadcrumb.crumbs$;
-    
   }
 
-  
   isSidenavCollapsed = false;
   screenWidth = 0;
   onToggleSideNav(data: sideNavToggle) {
@@ -51,20 +48,22 @@ export class MainLayoutComponent {
     let styleClass = '';
     if (this.isSidenavCollapsed && this.screenWidth > 768) {
       styleClass = 'content-trimmed';
-    } else if (this.isSidenavCollapsed && this.screenWidth <= 768 && this.screenWidth > 0) {
+    } else if (
+      this.isSidenavCollapsed &&
+      this.screenWidth <= 768 &&
+      this.screenWidth > 0
+    ) {
       styleClass = 'content-md-screen';
     }
     return styleClass;
   }
 
-
-  
   login() {
     // this.authService.navigateToLogin();
   }
-//  this.authService.logout();
+  //  this.authService.logout();
 
   get hasLoggedIn(): boolean {
-     return true;
+    return true;
   }
 }

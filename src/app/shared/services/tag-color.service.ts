@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TagColorService {
   constructor() {}
-  
+
   getAppoientmentStatusSeverity(status: number) {
     switch (status) {
       case 1:
@@ -14,11 +12,9 @@ export class TagColorService {
         return '#EF4444';
       case 4:
         return '#3B82F6';
-
     }
   }
   getStatusSeverity(status: number) {
-    
     switch (status) {
       case 1:
         return 'success';

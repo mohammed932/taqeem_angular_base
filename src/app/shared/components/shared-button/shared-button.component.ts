@@ -1,9 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-shared-button',
   templateUrl: './shared-button.component.html',
-  styleUrl: './shared-button.component.scss'
+  styleUrl: './shared-button.component.scss',
+  standalone: true,
+  imports: [MatButtonModule],
 })
 export class SharedButtonComponent {
   @Input() label: string = '';

@@ -1,5 +1,8 @@
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ChangeDirService } from '../../shared/services/change-dir.service';
 
@@ -7,19 +10,27 @@ import { ChangeDirService } from '../../shared/services/change-dir.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [MatButtonModule, MatIconModule, MatToolbarModule],
 })
 export class HeaderComponent {
   formGroup!: FormGroup;
 
   stateOptions: any[] = [
-    { label: 'ar', value: 'ar', flag: '../../../assets/images/flags/saudi-arabia-flag-icon.svg' },
-    { label: 'en', value: 'en', flag: '../../../assets/images/flags/united.svg' },
+    {
+      label: 'ar',
+      value: 'ar',
+      flag: '../../../assets/images/flags/saudi-arabia-flag-icon.svg',
+    },
+    {
+      label: 'en',
+      value: 'en',
+      flag: '../../../assets/images/flags/united.svg',
+    },
   ];
   currentLang: string = 'en';
 
-
-  constructor(public ChangeDirService: ChangeDirService,
-    ) {}
+  constructor(public ChangeDirService: ChangeDirService) {}
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit() {
     this.formGroup = new FormGroup({
@@ -27,7 +38,7 @@ export class HeaderComponent {
     });
     this.initLang();
   }
-  selectCurrentLang(e:any) {
+  selectCurrentLang(e: any) {
     console.log(e);
   }
   initLang() {
@@ -43,12 +54,12 @@ export class HeaderComponent {
   }
   logout() {
     // this.authService.logout().subscribe(
-      // res=>{  this.navigateToLogin();
-      // }
+    // res=>{  this.navigateToLogin();
+    // }
     // );
   }
   changeCurrentLang(lang: string) {
-    this.ChangeDirService.onChangeLang(lang)
+    this.ChangeDirService.onChangeLang(lang);
     this.formGroup.controls['currentLang'].patchValue(lang);
     const storedLang = localStorage.getItem('currentLang');
     if (storedLang == lang) {
@@ -58,7 +69,6 @@ export class HeaderComponent {
       location.reload();
     }
   }
-
 
   onChangeLang(cultureName: string) {
     // this.sessionState.setLanguage(cultureName);

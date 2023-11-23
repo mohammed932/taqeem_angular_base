@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FormatPhoneService {
-
-  constructor() { }
+  constructor() {}
   format(phone: any) {
-
-    if(phone?.includes('+')){
-
-        return phone.trim().split("+")[1];
-    }
-    else return phone
+    if (phone?.includes('+')) {
+      return phone.trim().split('+')[1];
+    } else return phone;
   }
 }

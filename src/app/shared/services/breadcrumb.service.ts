@@ -15,7 +15,7 @@ export class BreadcrumbService {
 
   setCrumbs(items: MenuItem[]) {
     this.crumbs.next(
-      (items || []).map(item =>
+      (items || []).map((item) =>
         Object.assign({}, item, {
           routerLinkActiveOptions: { exact: true },
         })

@@ -1,6 +1,11 @@
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import CustomMenuItem, { MenuNavFunction, navbarData } from './nav-data';
-
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { navbarData } from './nav-data';
 
 export interface sideNavToggle {
   screenWidth: number;
@@ -10,7 +15,7 @@ export interface sideNavToggle {
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
-  providers: [],
+  standalone: true,
 })
 export class SidenavComponent implements OnInit {
   collapsed = false;
@@ -24,22 +29,24 @@ export class SidenavComponent implements OnInit {
     if (this.screenWidth >= 768) {
       this.collapsed = false;
 
-      this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
+      this.onToggleSideNav.emit({
+        collapsed: this.collapsed,
+        screenWidth: this.screenWidth,
+      });
     }
   }
-  @Output() onToggleSideNav: EventEmitter<sideNavToggle> = new EventEmitter<sideNavToggle>();
+  @Output() onToggleSideNav: EventEmitter<sideNavToggle> =
+    new EventEmitter<sideNavToggle>();
 
-  constructor(
-  ) {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
 
     this.collapsed = false;
-    this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
+    this.onToggleSideNav.emit({
+      collapsed: this.collapsed,
+      screenWidth: this.screenWidth,
+    });
   }
-
-
 }
