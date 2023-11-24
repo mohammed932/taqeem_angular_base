@@ -1,0 +1,8 @@
+<div [dir]="ChangeDirService.dir() === 'ar' ? 'rtl' : 'ltr'">
+  <app-header></app-header>
+
+  <div class="content-body" [ngClass]="getBodyClass()">
+    <div class="flex justify-content-start"></div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
